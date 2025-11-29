@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>My Work – Mandai Internship Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* ==== PAGE LAYOUT ==== */
+    .work-page {
+      padding-bottom: 3rem;
+    }
+
+    .work-intro-highlight {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .work-pill {
+      padding: 1rem 1.2rem;
+      border-radius: 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      backdrop-filter: blur(14px);
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+    .work-pill strong {
+      display: block;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 0.25rem;
+      color: #38bdf8;
+    }
+
+    .work-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .work-section-card {
+      border-radius: 1.5rem;
+      padding: 1.75rem 1.75rem 1.5rem;
+      background: radial-gradient(circle at top left,
+          rgba(56, 189, 248, 0.12),
+          rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(148, 163, 184, 0.35);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.7);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .work-section-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      background: rgba(15, 23, 42, 0.7);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      color: #e5e7eb;
+      white-space: nowrap;
+    }
+
+    .badge-pill span {
+      font-size: 0.9rem;
+    }
+
+    .badge-pill-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #22c55e;
+    }
+
+    .work-section-title {
+      font-size: 1.4rem;
+      font-weight: 650;
+    }
+
+    .work-section-subtitle {
+      font-size: 0.95rem;
+      color: #e5e7eb;
+      max-width: 640px;
+    }
+
+    .work-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 0.4rem;
+      font-size: 0.78rem;
+      color: #a5b4fc;
+    }
+
+    .work-meta span {
+      padding: 0.15rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid rgba(165, 180, 252, 0.4);
+      background: rgba(15, 23, 42, 0.7);
+    }
+
+    .work-body {
+      margin-top: 0.75rem;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .work-body {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .work-body p,
+    .work-body ul {
+      font-size: 0.95rem;
+    }
+
+    .work-body ul {
+      padding-left: 1.1rem;
+    }
+
+    .work-body ul li {
+      margin-bottom: 0.25rem;
+    }
+
+    .sub-title {
+      margin-top: 0.9rem;
+      margin-bottom: 0.25rem;
+      font-weight: 650;
+      font-size: 1.02rem;
+    }
+
+    .tagline {
+      font-size: 0.85rem;
+      opacity: 0.85;
+    }
+
+    /* ==== MEDIA LAYOUTS (AUTO-GRID + HORIZONTAL SCROLL) ==== */
+
+    /* Section wrapper */
+    .visual-section {
+      margin-top: 2rem;
+    }
+
+    /* 1-column big media layout */
+    .visual-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    /* Image item styling */
+    .visual-item {
+      background: rgba(255, 255, 255, 0.08);
+      padding: 1rem;
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(12px);
+      transition: 0.25s ease;
+    }
+
+    .visual-item:hover {
+      transform: scale(1.01);
+      border-color: rgba(56, 189, 248, 0.35);
+    }
+
+    /* Full-size image */
+    .visual-full {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      object-fit: contain;
+    }
+
+    /* Caption styling */
+    .visual-caption {
+      margin-top: 0.6rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #cfe4ff;
+    }
+
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 0.9rem;
+      margin-top: 0.75rem;
+    }
+
+    .media-item {
+      border-radius: 1rem;
+      overflow: hidden;
+      background: radial-gradient(circle at top left,
+          rgba(248, 250, 252, 0.08),
+          rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      backdrop-filter: blur(10px);
+      cursor: pointer;
+      transition: 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .media-item:hover {
+      transform: translateY(-2px) scale(1.01);
+      border-color: rgba(56, 189, 248, 0.7);
+      box-shadow: 0 14px 30px rgba(15, 23, 42, 0.8);
+    }
+
+    .media-item img,
+    .media-item video {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .media-item.portrait img,
+    .media-item.portrait video {
+      height: auto;
+      aspect-ratio: 9 / 16;
+      object-fit: cover;
+    }
+
+    .media-caption {
+      padding: 0.55rem 0.7rem 0.6rem;
+      font-size: 0.8rem;
+      color: #e5e7eb;
+      border-top: 1px solid rgba(148, 163, 184, 0.35);
+    }
+
+    .media-item.wide {
+      width: 100%;
+      margin: 2rem 0;
+    }
+
+    .media-item.wide img {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+    }
+
+    .media-caption {
+      margin-top: 0.5rem;
+      font-size: 0.95rem;
+      line-height: 1.4;
+    }
+
+
+    /* Disable horizontal scroll */
+    .media-scroller-wrapper {
+      overflow-x: hidden;
+      /* No horizontal scroll */
+      width: 100%;
+    }
+
+    .media-scroller-label {
+      font-size: 0.85rem;
+      color: #cbd5f5;
+      margin-bottom: 0.3rem;
+      opacity: 0.9;
+    }
+
+    /* Turn the strip into a responsive grid instead */
+    .media-scroller {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1.5rem;
+      padding: 1rem 0;
+    }
+
+    .media-scroller::-webkit-scrollbar {
+      height: 6px;
+    }
+
+    .media-scroller::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.7);
+      border-radius: 999px;
+    }
+
+
+    /* Make videos fill container nicely */
+    .media-scroller-item video {
+      width: 100%;
+      height: 230px;
+      object-fit: cover;
+      border-radius: 14px;
+    }
+
+    /* ==== RPA TABS & FLOW ==== */
+
+    .rpa-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      padding: 0.4rem;
+      border-radius: 999px;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      margin-bottom: 1rem;
+    }
+
+    .rpa-tab {
+      flex: 1;
+      padding: 0.45rem 0.7rem;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: #e5e7eb;
+      font-size: 0.82rem;
+      cursor: pointer;
+      transition: 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .rpa-tab.active {
+      background: linear-gradient(135deg, #38bdf8, #22c55e);
+      color: #0f172a;
+      font-weight: 600;
+      box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.6);
+    }
+
+    .rpa-tab-panels {
+      margin-top: 0.8rem;
+    }
+
+    .rpa-tab-panel {
+      display: none;
+      animation: fadeIn 0.25s ease-out;
+    }
+
+    .rpa-tab-panel.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .rpa-panel-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1.1fr);
+      gap: 1.5rem;
+    }
+
+    @media (max-width: 900px) {
+      .rpa-panel-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .rpa-panel-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin-bottom: 0.4rem;
+    }
+
+    .rpa-panel-text {
+      font-size: 0.95rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .rpa-list {
+      font-size: 0.95rem;
+      padding-left: 1.1rem;
+    }
+
+    .rpa-list li {
+      margin-bottom: 0.25rem;
+    }
+
+    .rpa-flow-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    .rpa-flow-horizontal {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.3rem;
+      background: radial-gradient(circle at top left,
+          rgba(56, 189, 248, 0.25),
+          rgba(15, 23, 42, 0.95));
+      border-radius: 999px;
+      padding: 0.45rem 0.7rem;
+      border: 1px solid rgba(148, 163, 184, 0.6);
+    }
+
+    .flow-node {
+      flex: 1;
+      padding: 0.35rem 0.55rem;
+      border-radius: 999px;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #e5e7eb;
+      border: 1px dashed rgba(148, 163, 184, 0.8);
+      background: rgba(15, 23, 42, 0.8);
+    }
+
+    .flow-node.active {
+      background: linear-gradient(145deg, #38bdf8, #22c55e);
+      color: #0f172a;
+      font-weight: 600;
+      border-style: solid;
+    }
+
+    .flow-connector {
+      width: 22px;
+      height: 2px;
+      border-radius: 999px;
+      background: rgba(148, 163, 184, 0.9);
+    }
+
+    .rpa-flow-vertical {
+      display: grid;
+      gap: 0.7rem;
+      margin-top: 0.2rem;
+    }
+
+    .flow-step {
+      display: grid;
+      grid-template-columns: 26px minmax(0, 1fr);
+      gap: 0.6rem;
+      align-items: flex-start;
+    }
+
+    .flow-step-icon {
+      width: 26px;
+      height: 26px;
+      border-radius: 999px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #38bdf8, #22c55e);
+      color: #0f172a;
+      font-size: 0.8rem;
+      font-weight: 700;
+      box-shadow: 0 0 0 2px rgba(15, 23, 42, 0.9);
+    }
+
+    .flow-step-content h3 {
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 0.1rem;
+    }
+
+    .flow-step-content p {
+      font-size: 0.82rem;
+      color: #e5e7eb;
+    }
+
+    /* ==== LIGHTBOX ==== */
+
+    #lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(15, 23, 42, 0.9);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+      padding: 1rem;
+    }
+
+    #lightbox-overlay.active {
+      display: flex;
+    }
+
+    .lightbox-content {
+      max-width: 1100px;
+      width: 100%;
+      max-height: 90vh;
+      border-radius: 1rem;
+      background: radial-gradient(circle at top left,
+          rgba(56, 189, 248, 0.2),
+          rgba(15, 23, 42, 0.98));
+      border: 1px solid rgba(148, 163, 184, 0.8);
+      padding: 0.75rem;
+      position: relative;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.85);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .lightbox-content img,
+    .lightbox-content video {
+      max-width: 100%;
+      max-height: 80vh;
+      border-radius: 0.8rem;
+      display: block;
+    }
+
+    .lightbox-close {
+      position: absolute;
+      top: 0.4rem;
+      right: 0.7rem;
+      font-size: 1.6rem;
+      background: transparent;
+      border: none;
+      color: #e5e7eb;
+      cursor: pointer;
+    }
+
+    /* ==== SUMMARY STRIP (Nature / Challenges / Growth) ==== */
+    .summary-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .summary-card {
+      padding: 1.1rem 1.2rem;
+      border-radius: 1.2rem;
+      background: radial-gradient(circle at top left,
+          rgba(56, 189, 248, 0.15),
+          rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(148, 163, 184, 0.6);
+      font-size: 0.95rem;
+    }
+
+    .summary-card h3 {
+      font-size: 1rem;
+      margin-bottom: 0.35rem;
+    }
+
+    .summary-card ul {
+      padding-left: 1.15rem;
+      margin: 0.3rem 0 0;
+    }
+
+    .summary-card ul li {
+      margin-bottom: 0.2rem;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="nav-brand">Digital Portfolio</div>
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="work.html" class="nav-link active">My Work</a>
+        <a href="journal.html" class="nav-link">Journal</a>
+        <a href="reflection.html" class="nav-link">Reflection</a>
+        <a href="skills.html" class="nav-link">Skills</a>
+        <a href="outlook.html" class="nav-link">Outlook</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section fade-up work-page">
+
+      <!-- TOP HEADER -->
+      <div class="section-header">
+        <p class="section-kicker">Internship Deliverables</p>
+        <h1 class="section-title">My Work at Mandai Wildlife Group</h1>
+        <p class="section-subtitle">
+          This page showcases the key projects I completed, including
+          digital artefacts, RPA automation, video production, platforms and innovation initiatives. Each artefact is
+          linked to my Technical Skills &amp; Competencies (TSC) and Critical Core Skills (CCS).
+        </p>
+      </div>
+
+      <!-- QUICK HIGHLIGHT STRIP -->
+      <div class="work-intro-highlight">
+        <div class="work-pill">
+          <strong>Core Artefact 1</strong>
+          Procurement RPA Bot automating file download from Sesami to uploading them into SharePoint, saving significant
+          manhours for the Procurement
+          team.
+        </div>
+        <div class="work-pill">
+          <strong>Core Artefact 2</strong>
+          MyProject100K video suite – end-to-end filming, editing and AV direction for Mandai’s MyProject100K Award
+          Ceremony.
+        </div>
+        <div class="work-pill">
+          <strong>Supporting Projects</strong>
+          AEIOU Learning Festival site &amp; recap, Transformation Office SharePoint redesign, journey mapping and
+          Mandai Innovation Forum support.
+        </div>
+      </div>
+
+      <!-- MAIN GRID OF WORK SECTIONS -->
+      <div class="work-grid">
+
+        <!-- ========================= -->
+        <!-- ARTEFACT 1: PROCUREMENT RPA BOT -->
+        <!-- ========================= -->
+        <section class="work-section-card" id="artefact-rpa">
+          <div class="work-section-header">
+            <div>
+              <div class="badge-pill">
+                <span class="badge-pill-dot"></span>
+                Digital Artefact 1 · RPA &amp; Automation
+              </div>
+              <h2 class="work-section-title">Procurement RPA Bot – Sesami to SharePoint Automation</h2>
+              <p class="work-section-subtitle">
+                An end-to-end <strong>Power Automate for Desktop</strong> flow that logs into the Sesami portal,
+                extracts
+                RFQ/Tender information, downloads response and analysis files, and uploads them into a structured
+                SharePoint library.
+              </p>
+              <div class="work-meta">
+                <span>Tech: Power Automate, SharePoint</span>
+                <span>Role: RPA Developer</span>
+                <span>Period: Apr – Nov</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="rpa-tabs">
+            <button class="rpa-tab active" data-tab="rpa-overview">1. Overview &amp; Flow</button>
+            <button class="rpa-tab" data-tab="rpa-artefacts">2. Digital Artefacts</button>
+            <button class="rpa-tab" data-tab="rpa-tasks">3. Tasks, TSC &amp; CCS</button>
+            <button class="rpa-tab" data-tab="rpa-growth">4. Nature of Work &amp; Learning</button>
+          </div>
+
+          <div class="rpa-tab-panels">
+
+            <!-- TAB 1: OVERVIEW -->
+            <div class="rpa-tab-panel active" id="rpa-overview">
+              <div class="rpa-panel-grid">
+                <div>
+                  <h3 class="rpa-panel-title">High-level Automation Flow</h3>
+                  <p class="rpa-panel-text">
+                    The bot automates repetitive manual steps previously done by Procurement officers:
+                    logging into Sesami, retrieving RFQs/Tenders, downloading ZIP, PDF and Excel files, classifying them
+                    by
+                    department.
+                  </p>
+                  <p class="rpa-panel-text">
+                    By taking over an in-progress flow from my supervisor and completing it, I helped to develop a
+                    production-ready
+                    solution that <strong>reduces human error</strong> and creates an auditable trail of procurement
+                    documents.
+                  </p>
+
+                  <h4 class="sub-title">Brief Description of Deliverable</h4>
+                  <p class="rpa-panel-text">
+                    A single, robust Power Automate desktop flow that is triggered everyday automatically to process a
+                    batch of
+                    RFQs/Tenders from Sesami and sync them into a structured SharePoint repository without manual
+                    downloading or file-moving.
+                  </p>
+
+                  <h4 class="sub-title">My Contribution</h4>
+                  <ul class="rpa-list">
+                    <li>Refactored the incomplete original flow into clear segments (Sesami navigation, downloads,
+                      classification, upload).</li>
+                    <li>Added data table cleaning, file-type classification rules, and resilient UI automation patterns.
+                    </li>
+                    <li>Implemented exception handling so that single-file failures do not crash the entire run.</li>
+                  </ul>
+
+                  <h4 class="sub-title">How It Will Be Used</h4>
+                  <p class="rpa-panel-text">
+                    The bot is intended to be run by the Procurement team to process RFQs/Tenders from Sesami on a
+                    regular basis, supporting future unattended deployment once licensing and VM setup are complete.
+                  </p>
+                </div>
+
+                <div class="rpa-flow-wrapper">
+                  <div class="rpa-flow-horizontal">
+                    <div class="flow-node active">Sesami Portal</div>
+                    <div class="flow-connector"></div>
+                    <div class="flow-node">RPA Bot</div>
+                    <div class="flow-connector"></div>
+                    <div class="flow-node">SharePoint Library</div>
+                  </div>
+
+                  <div class="rpa-flow-vertical">
+                    <div class="flow-step">
+                      <div class="flow-step-icon">1</div>
+                      <div class="flow-step-content">
+                        <h3>Login &amp; Search</h3>
+                        <p>Bot logs into Sesami, sorts RFQs/Tenders by closing date and extracts links into a data
+                          table.</p>
+                      </div>
+                    </div>
+                    <div class="flow-step">
+                      <div class="flow-step-icon">2</div>
+                      <div class="flow-step-content">
+                        <h3>Download Responses</h3>
+                        <p>Downloads Quotation Response ZIP files, PDFs and Quotation Analysis Excel files, including a
+                          printed backup if no
+                          documents are uploaded.</p>
+                      </div>
+                    </div>
+                    <div class="flow-step">
+                      <div class="flow-step-icon">3</div>
+                      <div class="flow-step-content">
+                        <h3>Classify &amp; Clean</h3>
+                        <p>Classifies files by type and department, cleans up duplicates and prepares folders for
+                          upload.</p>
+                      </div>
+                    </div>
+                    <div class="flow-step">
+                      <div class="flow-step-icon">4</div>
+                      <div class="flow-step-content">
+                        <h3>Upload &amp; Archive</h3>
+                        <p>Uploads all files to SharePoint, then clears local folders to avoid clutter and maintain data
+                          security.</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- TAB 2: DIGITAL ARTEFACTS -->
+            <div class="rpa-tab-panel" id="rpa-artefacts">
+              <h3 class="rpa-panel-title">Digital Artefacts & Screenshots</h3>
+              <p class="rpa-panel-text tagline">
+                Below is the complete end-to-end breakdown of the Procurement RPA Bot, from Sesami login to SharePoint
+                upload.
+                Each screenshot shows the actual Power Automate Desktop workflow executed during production.
+              </p>
+
+              <!-- VERTICAL FULL-WIDTH STEPS -->
+              <div class="rpa-steps">
+
+                <!-- STEP 1 -->
+                <figure class="media-item wide">
+                  <img src="images/Step_1.png" class="lightbox-trigger" data-full="images/Step_1.png"
+                    alt="Step 1 – Login & Search" />
+                  <figcaption class="media-caption">
+                    <strong>Step 1 — Sesami Login & Initial Search.</strong><br>
+                    The bot launches Microsoft Edge, logs into Sesami with secure credentials, navigates to the
+                    RFQ/Tender search
+                    page and performs the initial query. The bot extracts all available RFQ/Tender response links,
+                    removes duplicates, and stores the cleaned
+                    dataset
+                    for downstream processing. This step establishes the session and prepares the extraction
+                    workflow.
+                  </figcaption>
+                </figure>
+
+                <!-- STEP 2 -->
+                <figure class="media-item wide">
+                  <img src="images/Step_2.png" class="lightbox-trigger" data-full="images/Step_2.png"
+                    alt="Step 2 – RFQ Response Extraction" />
+                  <figcaption class="media-caption">
+                    <strong>Step 2 — Downloading RFQ Response Files.</strong><br>
+                    The bot loops through the links that were extracted previously in step one to go through all the
+                    quotation responses and it downloads all the response files accordingly.
+                  </figcaption>
+                </figure>
+
+                <!-- STEP 3 -->
+                <figure class="media-item wide">
+                  <img src="images/Step_3.png" class="lightbox-trigger" data-full="images/Step_3.png"
+                    alt="Step 3 – Vendor Response Handling" />
+                  <figcaption class="media-caption">
+                    <strong>Step 3 — RFQ Response Printing Logic.</strong><br>
+                    For each RFQ/Tender, the bot triggers a PDF print fallback.
+                  </figcaption>
+                </figure>
+
+                <!-- STEP 4 -->
+                <figure class="media-item wide">
+                  <img src="images/Step_4.png" class="lightbox-trigger" data-full="images/Step_4.png"
+                    alt="Step 4 – File Naming & Printing" />
+                  <figcaption class="media-caption">
+                    <strong>Step 4 — RFQ View Data Extraction</strong><br>
+                    The bot extracts all links of the RFQ View files, which have the closing dates to be the current
+                    date and stores them in a data table.
+                  </figcaption>
+                </figure>
+
+                <!-- STEP 5 -->
+                <figure class="media-item wide">
+                  <img src="images/Step_5.png" class="lightbox-trigger" data-full="images/Step_5.png"
+                    alt="Step 5 – Quotation Analysis Page Load" />
+                  <figcaption class="media-caption">
+                    <strong>Step 5 — RFQ View Downloading Logic</strong><br>
+                    The bot prints out the page in each link to show the RFQ View for Procurement Officers to see.
+                  </figcaption>
+                </figure>
+
+                <!-- STEP 6 -->
+                <figure class="media-item wide">
+                  <img src="images/Step_6.png" class="lightbox-trigger" data-full="images/Step_6.png"
+                    alt="Step 6 – Quotation Analysis Export" />
+                  <figcaption class="media-caption">
+                    <strong>Step 6 — Extracting Quotation Analysis Files Links</strong><br>
+                    The bot extracts the links to the Quotation Analysis Files and stores it in a datatable.
+                  </figcaption>
+                </figure>
+
+                <!-- STEP 7 -->
+                <figure class="media-item wide">
+                  <img src="images/Step_7.png" class="lightbox-trigger" data-full="images/Step_7.png"
+                    alt="Step 7 – ZIP File Classification" />
+                  <figcaption class="media-caption">
+                    <strong>Step 7 — Downloading Quotation Analysis Files</strong><br>
+                    Quotation Analysis Files are downloaded one by one.
+                  </figcaption>
+                </figure>
+
+                <!-- STEP 8 -->
+                <figure class="media-item wide">
+                  <img src="images/Step_8.png" class="lightbox-trigger" data-full="images/Step_8.png"
+                    alt="Step 8 – PDF/Print Folder Logic" />
+                  <figcaption class="media-caption">
+                    <strong>Step 8 — Uploading all the Quotation Response Files into Sharepoint</strong><br>
+                    All the Quotation Responses Files are uploaded into Sharepoint, under a specific Folder, where it is
+                    then sorted by the Department for ease of access for Procurement Officers.
+                  </figcaption>
+                </figure>
+
+                <!-- STEP 9 -->
+                <figure class="media-item wide">
+                  <img src="images/Step_9.png" class="lightbox-trigger" data-full="images/Step_9.png"
+                    alt="Step 9 – Quotation Analysis Folder Structure" />
+                  <figcaption class="media-caption">
+                    <strong>Step 9 — Uploading all PDF Files into Sharepoint</strong><br>
+                    The bot creates SharePoint folder structures for each PDF File according to it's name and
+                    constructs
+                    final folder paths programmatically.
+                  </figcaption>
+                </figure>
+
+                <!-- STEP 10 -->
+                <figure class="media-item wide">
+                  <img src="images/Step_10.png" class="lightbox-trigger" data-full="images/Step_10.png"
+                    alt="Step 10 – SharePoint Upload" />
+                  <figcaption class="media-caption">
+                    <strong>Step 10 — SharePoint Upload of All Quotation Analysis Files</strong><br>
+                    The bot uploads the Quotation Analysis Files to SharePoint, creates department-wise folders and
+                    finally
+                    clears temporary local storage. This completes the fully automated cycle.
+                  </figcaption>
+                </figure>
+
+              </div>
+            </div>
+
+          </div>
+      </div>
+      </div>
+      </div>
+
+      <!-- TAB 3: TASKS, SKILLS, ACTIONS -->
+      <div class="rpa-tab-panel" id="rpa-tasks">
+
+        <div class="rpa-panel-grid improved">
+
+          <!-- LEFT COLUMN -->
+          <div class="rpa-card">
+            <h3 class="rpa-panel-title">🛠️ Tasks & Technical Skills (TSC)</h3>
+            <p class="rpa-panel-text">
+              These responsibilities align with the Technical Skills & Competencies (TSC) for an
+              <strong>Automation / RPA Engineer</strong> under the Skills Framework for ICT.
+            </p>
+
+            <ul class="rpa-list bullets">
+              <li><strong>Refactored</strong> a partially-completed RPA workflow to establish a clean, modular
+                structure.</li>
+              <li><strong>Configured UI automation</strong> using selectors, image-recognition anchors and defensive
+                clicking strategies.</li>
+              <li><strong>Designed file classification logic</strong> and implemented reliable folder-naming
+                conventions.</li>
+              <li><strong>Integrated SharePoint uploading</strong> using binary conversion and dynamic folder
+                generation.</li>
+              <li><strong>Developed exception handling</strong> for unstable UI states, timeouts and vendor edge cases.
+              </li>
+            </ul>
+
+            <h4 class="sub-title accent">⚡ Actions Taken & Outcomes</h4>
+            <ul class="rpa-list bullets">
+              <li>Conducted <strong>multi-scenario test cycles</strong> to strengthen reliability across live
+                RFQs/Tenders.</li>
+              <li>Supported business justification for a <strong>new unattended bot licence</strong> and VM
+                provisioning.</li>
+              <li>Demonstrated potential to save <strong>800 manhours</strong> and enhance audit transparency.
+              </li>
+            </ul>
+          </div>
+
+          <!-- RIGHT COLUMN -->
+          <div class="rpa-card">
+            <h3 class="rpa-panel-title">🌱 CCS – Critical Core Skills (GSC)</h3>
+            <p class="rpa-panel-text">
+              The project required applying multiple Critical Core Skills (CCS), crucial for workplace performance.
+            </p>
+
+            <ul class="rpa-list bullets">
+              <li><strong>Problem Solving:</strong> Investigated intermittent failures, built fallback logic, and
+                implemented resilient recovery steps.</li>
+              <li><strong>Collaboration:</strong> Worked with Procurement, IT and the Transformation Office to validate
+                folder rules and ensure process alignment.</li>
+              <li><strong>Communication:</strong> Translated technical workflows into clear explanations for
+                non-technical stakeholders.</li>
+              <li><strong>Adaptability:</strong> Took over an inherited, quarter-complete bot and extended it with
+                additional functionalities.</li>
+              <li><strong>Digital Fluency:</strong> Orchestrated a workflow integrating Sesami, desktop automation, and
+                SharePoint seamlessly.</li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- TAB 4: NATURE, CHALLENGES, GROWTH -->
+      <div class="rpa-tab-panel" id="rpa-growth">
+
+        <div class="rpa-panel-grid improved">
+
+          <!-- LEFT -->
+          <div class="rpa-card">
+            <h3 class="rpa-panel-title">📌 Nature of Work</h3>
+            <p class="rpa-panel-text">
+              The Procurement RPA Bot constituted one of my <strong>primary responsibilities</strong> during the
+              internship.
+              My work revolved around stabilising the end-to-end workflow, refining the logic for edge cases, and
+              preparing
+              the bot for future unattended deployment.
+            </p>
+
+            <p class="rpa-panel-text">
+              This required balancing <strong>technical reliability</strong> with <strong>operational
+                constraints</strong>.
+              The bot had to function consistently across hundreds of live RFQs/Tenders, each with different structures
+              and
+              vendor behaviours.
+            </p>
+
+            <h4 class="sub-title accent">⚠️ Challenges Faced</h4>
+            <ul class="rpa-list bullets">
+              <li>Frequent UI layout changes on the Sesami portal, affecting element detection.</li>
+              <li>Vendors uploading incomplete, incorrectly named or completely missing documents.</li>
+              <li>Need to avoid file misclassification, overwrites or leaving sensitive data on local storage.</li>
+            </ul>
+          </div>
+
+          <!-- RIGHT -->
+          <div class="rpa-card">
+            <h3 class="rpa-panel-title">🚀 Learning & Growth</h3>
+            <ul class="rpa-list bullets">
+              <li>Developed strong capability in designing <strong>resilient RPA logic</strong> that withstands UI and
+                data variability.</li>
+              <li>Enhanced my documentation approach by maintaining structured evidence of changes and test outcomes.
+              </li>
+              <li>Built confidence in articulating automation logic, risks and trade-offs to managerial and
+                non-technical audiences.</li>
+              <li>Gained a deeper understanding of how automation supports <strong>enterprise transformation
+                  goals</strong>.</li>
+            </ul>
+
+            <p class="rpa-panel-text">
+              Overall, this work significantly strengthened my foundation in
+              <strong>RPA Development</strong>, blending technical development with communication, stakeholder
+              engagement
+              and reflective learning.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+
+      </div>
+    </section>
+
+    <!-- ========================= -->
+    <!-- ARTEFACT 2: MYPROJECT100K VIDEO SUITE -->
+    <!-- ========================= -->
+    <section class="work-section-card" id="artefact-mp100k">
+      <div class="work-section-header">
+        <div>
+          <div class="badge-pill">
+            <span class="badge-pill-dot"></span>
+            Digital Artefact 2 · Video &amp; AV Production
+          </div>
+          <h2 class="work-section-title">MyProject100K Video Suite &amp; Awards Ceremony</h2>
+          <p class="work-section-subtitle">
+            A set of short videos and event AV support for MyProject100K, showcasing productivity and innovation
+            projects across Mandai. This artefact combines filming, editing, storytelling and live AV direction.
+          </p>
+          <div class="work-meta">
+            <span>Tech: Phone camera, CapCut, PowerPoint</span>
+            <span>Role: Video Producer &amp; AV Support</span>
+            <span>Period: Jul – Nov</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-body">
+        <div>
+          <h3 class="sub-title">Brief Description &amp; Deliverable</h3>
+          <p>
+            I produced a video suite for multiple MyProject100K teams, including intro segments and project explainers.
+            I also supported the dry-run and award ceremony with AV direction, ensuring that
+            slides and videos ran smoothly in sync with the programme.
+          </p>
+
+          <h3 class="sub-title">My Contribution</h3>
+          <ul>
+            <li>Coordinated with project teams to plan filming slots around their operations.</li>
+            <li>Shot interview-style and B-roll footage across different Mandai locations.</li>
+            <li>Edited videos, added titles/transitions and aligned each clip to the event narrative.</li>
+            <li>Supported the event day by managing AV playback cues and troubleshooting issues live.</li>
+          </ul>
+
+          <h3 class="sub-title">How the Artefact Will Be Used</h3>
+          <p>
+            The videos were used during the MyProject100K ceremony and will be archived as internal case studies
+            for future learning festivals and innovation campaigns.
+          </p>
+
+          <h3 class="sub-title">CCS &amp; GSC in This Task</h3>
+          <ul>
+            <li><strong>Communication &amp; Collaboration:</strong> Worked closely with teams to understand their
+              projects and translate them into clear messaging.</li>
+            <li><strong>Creative Thinking:</strong> Designed engaging storylines and visual flow for each video.</li>
+            <li><strong>Self-Management:</strong> Juggled multiple deadlines and reshoots before the ceremony.</li>
+            <li><strong>Adaptability:</strong> Adjusted to last-minute changes in schedules and content requests.</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="sub-title">Video Strip</h3>
+          <div class="media-scroller-wrapper">
+            <div class="media-scroller">
+              <div class="media-item media-scroller-item">
+                <video src="videos/Han_Qiang_Team_2_MyProject100K_Awards_Ceremony_Video.mp4" class="lightbox-trigger"
+                  data-full="videos/Han_Qiang_Team_2_MyProject100K_Awards_Ceremony_Video.mp4" controls
+                  playsinline></video>
+                <div class="media-caption">Han Qiang Team 2 – Data Collation solution video.</div>
+              </div>
+              <div class="media-item media-scroller-item">
+                <video src="videos/Jasmine_MyProject100K_Awards_Ceremony_Video.mp4" class="lightbox-trigger"
+                  data-full="videos/Jasmine_MyProject100K_Awards_Ceremony_Video.mp4" controls playsinline></video>
+                <div class="media-caption">Jasmine’s project video – workflow transformation.</div>
+              </div>
+              <div class="media-item media-scroller-item">
+                <video src="videos/Kelly_MyProject100K_Awards_Ceremony_Video.mp4" class="lightbox-trigger"
+                  data-full="videos/Kelly_MyProject100K_Awards_Ceremony_Video.mp4" controls playsinline></video>
+                <div class="media-caption">Kelly’s team – innovation &amp; process change story.</div>
+              </div>
+            </div>
+          </div>
+
+    </section>
+
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <!-- ========================= -->
+    <!-- SUPPORTING PROJECTS: PLATFORMS & EVENTS -->
+    <!-- ========================= -->
+    <section class="work-section-card" id="platforms-events">
+      <div class="work-section-header">
+        <div>
+          <div class="badge-pill">
+            <span class="badge-pill-dot"></span>
+            Supporting Projects · Platforms &amp; Events
+          </div>
+          <h2 class="work-section-title">AEIOU Learning Festival, SharePoint &amp; Innovation Events</h2>
+          <p class="work-section-subtitle">
+            Alongside RPA and video work, I supported Mandai’s wider transformation journey through platforms,
+            campaigns and events.
+          </p>
+          <div class="work-meta">
+            <span>Tech: SharePoint, HTML/CSS, PowerPoint, Capcut</span>
+            <span>Role: Platform &amp; Content Support</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="work-body">
+        <div>
+          <h3 class="sub-title">AEIOU Learning Festival &amp; Transformation Office Platforms</h3>
+          <ul>
+            <li>Redesigned the <strong>Transformation Office SharePoint</strong> site to make resources easier to
+              find.</li>
+            <li>Built an AEIOU Learning Festival microsite to showcase Innovation Behaviours and a small quiz they can
+              do.</li>
+            <li>Edited recap videos to highlight key takeaways.</li>
+          </ul>
+
+          <h3 class="sub-title">Innovation Forum &amp; Journey Mapping</h3>
+          <ul>
+            <li>Supported the Mandai Innovation Forum with AV and on-ground logistics.</li>
+            <li>Participated in staff and guest journey mapping sessions, linking process pain points to potential
+              digital or automation solutions.</li>
+            <li>Engaged SIT adult learners and internal teams to co-ideate process improvements using design
+              thinking and Lean.</li>
+          </ul>
+
+          <h3 class="sub-title">CCS &amp; GSC Demonstrated</h3>
+          <ul>
+            <li><strong>Collaboration:</strong> Worked with HR, Ops, Transformation and external partners on content.
+            </li>
+            <li><strong>Creative Thinking:</strong> Translated complex messages into clear visual assets.</li>
+            <li><strong>Influence:</strong> Helped position the Transformation Office as an enabler through visuals
+              and storytelling.</li>
+          </ul>
+        </div>
+
+        <div class="visual-section">
+          <h3 class="sub-title">Screenshots & Visuals</h3>
+
+          <div class="visual-grid">
+
+            <!-- IMAGE 1 -->
+            <figure class="visual-item">
+              <img src="images/AEIOU_Microsite.png" class="lightbox-trigger visual-full"
+                data-full="images/AEIOU_Microsite.png" alt="AEIOU Microsite Home" />
+              <figcaption class="visual-caption">
+                AEIOU Learning Festival microsite.
+              </figcaption>
+            </figure>
+
+            <!-- IMAGE 2 -->
+            <figure class="visual-item">
+              <img src="images/Customer_Journey_Map.png" class="lightbox-trigger visual-full"
+                data-full="images/Customer_Journey_Map.png" alt="Transformation Office SharePoint Redesign" />
+              <figcaption class="visual-caption">
+                Customer Journey Map on MIRO.
+              </figcaption>
+            </figure>
+
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <br>
+    <br>
+
+
+  </main>
+
+  <!-- GLOBAL LIGHTBOX -->
+  <div id="lightbox-overlay">
+    <div class="lightbox-content">
+      <button class="lightbox-close" aria-label="Close">&times;</button>
+    </div>
+  </div>
+
+  <footer class="container">
+    © 2025 Moanish Ashok Kumar · My Work at Mandai Wildlife Group
+  </footer>
+
+  <script>
+    // RPA Tabs
+    document.addEventListener("DOMContentLoaded", () => {
+      const tabButtons = document.querySelectorAll(".rpa-tab");
+      const tabPanels = document.querySelectorAll(".rpa-tab-panel");
+
+      tabButtons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetId = btn.dataset.tab;
+          tabButtons.forEach((b) => b.classList.remove("active"));
+          btn.classList.add("active");
+
+          tabPanels.forEach((panel) => {
+            panel.classList.toggle("active", panel.id === targetId);
+          });
+        });
+      });
+
+      // Lightbox
+      const overlay = document.getElementById("lightbox-overlay");
+      const content = overlay.querySelector(".lightbox-content");
+      const closeBtn = overlay.querySelector(".lightbox-close");
+
+      function openLightbox(mediaEl) {
+        const existing = content.querySelector("img, video");
+        if (existing) existing.remove();
+
+        const fullSrc = mediaEl.dataset.full || mediaEl.src;
+        let cloned;
+
+        if (mediaEl.tagName === "VIDEO") {
+          cloned = document.createElement("video");
+          cloned.src = fullSrc;
+          cloned.controls = true;
+          cloned.autoplay = true;
+          cloned.playsInline = true;
+        } else {
+          cloned = document.createElement("img");
+          cloned.src = fullSrc;
+          cloned.alt = mediaEl.alt || "";
+        }
+
+        content.appendChild(cloned);
+        overlay.classList.add("active");
+      }
+
+      document.querySelectorAll(".lightbox-trigger").forEach((el) => {
+        el.addEventListener("click", (e) => {
+          e.stopPropagation();
+          openLightbox(el);
+        });
+      });
+
+      function closeLightbox() {
+        overlay.classList.remove("active");
+        const media = content.querySelector("video");
+        if (media) media.pause();
+      }
+
+      closeBtn.addEventListener("click", closeLightbox);
+      overlay.addEventListener("click", (e) => {
+        if (e.target === overlay) closeLightbox();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && overlay.classList.contains("active")) {
+          closeLightbox();
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
