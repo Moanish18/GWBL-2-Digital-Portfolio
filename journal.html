@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Weekly Journal – Mandai Internship Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Page-specific styling -->
+  <style>
+    /* Hero */
+    .journal-hero {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+
+    .journal-hero .section-title {
+      font-size: clamp(2.1rem, 3vw, 2.6rem);
+    }
+
+    .journal-hero .section-subtitle {
+      max-width: 760px;
+      margin: 0.75rem auto 0;
+    }
+
+    /* Reflection cards */
+    .reflection-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 1.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    @media (min-width: 900px) {
+      .reflection-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    .reflection-card {
+      border-radius: 1.4rem;
+      padding: 1.75rem 1.75rem 1.5rem;
+      background: radial-gradient(circle at top left,
+                rgba(56, 189, 248, 0.22),
+                rgba(15, 23, 42, 0.95));
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 18px 40px rgba(15, 23, 42, 0.5);
+      color: #e5e7eb;
+    }
+
+    .reflection-card h2 {
+      margin-bottom: 0.4rem;
+      font-size: 1.35rem;
+    }
+
+    .reflection-card small {
+      opacity: 0.85;
+      font-size: 0.85rem;
+    }
+
+    .reflection-card p {
+      margin-top: 0.8rem;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* Timeline layout */
+    .timeline-wrapper {
+      position: relative;
+      padding-left: 1.8rem;
+      margin-top: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .timeline-wrapper::before {
+      content: "";
+      position: absolute;
+      top: 0.25rem;
+      left: 0.6rem;
+      width: 3px;
+      height: 100%;
+      background: linear-gradient(
+        to bottom,
+        rgba(34, 197, 94, 0.9),
+        rgba(56, 189, 248, 0.5)
+      );
+      border-radius: 999px;
+      opacity: 0.6;
+    }
+
+    .timeline-card {
+      position: relative;
+      margin-bottom: 1.25rem;
+      border-radius: 1.4rem;
+      padding: 1.1rem 1.2rem;
+      background: rgba(15, 23, 42, 0.85);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      box-shadow: 0 14px 34px rgba(15, 23, 42, 0.55);
+      overflow: hidden;
+    }
+
+    .timeline-card::before {
+      content: "";
+      position: absolute;
+      left: -1.05rem;
+      top: 1.05rem;
+      width: 14px;
+      height: 14px;
+      border-radius: 999px;
+      background: radial-gradient(circle, #22c55e 0, #22c55e 45%, #065f46 70%);
+      box-shadow: 0 0 0 4px rgba(34, 197, 94, 0.15);
+    }
+
+    details.timeline-card summary {
+      list-style: none;
+      cursor: pointer;
+      outline: none;
+    }
+
+    details.timeline-card summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .timeline-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      margin-bottom: 0.3rem;
+    }
+
+    .timeline-week {
+      font-weight: 600;
+      font-size: 1.05rem;
+      color: #e5e7eb;
+    }
+
+    .timeline-dates {
+      font-size: 0.85rem;
+      color: #a5b4fc;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .timeline-summary {
+      font-size: 0.95rem;
+      color: #cbd5f5;
+      margin-bottom: 0.6rem;
+    }
+
+    .chip-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .chip {
+      font-size: 0.75rem;
+      padding: 0.18rem 0.55rem;
+      border-radius: 999px;
+      border: 1px solid rgba(94, 234, 212, 0.5);
+      background: radial-gradient(circle at top left,
+                  rgba(56, 189, 248, 0.2),
+                  rgba(15, 23, 42, 0.95));
+      color: #e0f2fe;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .timeline-body {
+      margin-top: 0.6rem;
+      padding-top: 0.45rem;
+      border-top: 1px dashed rgba(148, 163, 184, 0.5);
+      font-size: 0.93rem;
+      color: #e5e7eb;
+    }
+
+    .timeline-body ul {
+      margin: 0.3rem 0 0.1rem;
+      padding-left: 1.1rem;
+    }
+
+    .timeline-body li {
+      margin-bottom: 0.28rem;
+      line-height: 1.6;
+    }
+
+    /* Expand indicator */
+    .summary-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+    }
+
+    .expand-indicator {
+      flex-shrink: 0;
+      width: 22px;
+      height: 22px;
+      border-radius: 999px;
+      border: 1px solid rgba(148, 163, 184, 0.7);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.8rem;
+      color: #e5e7eb;
+      background: radial-gradient(circle at top left,
+                  rgba(59, 130, 246, 0.25),
+                  rgba(15, 23, 42, 0.98));
+      transition: transform 0.2s ease, background 0.2s ease;
+    }
+
+    details[open] .expand-indicator {
+      transform: rotate(90deg);
+      background: radial-gradient(circle at top left,
+                  rgba(34, 197, 94, 0.35),
+                  rgba(15, 23, 42, 0.98));
+    }
+
+    /* Soft reveal animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+<body>
+<header class="navbar">
+  <div class="container nav-inner">
+    <div class="nav-brand">Digital Portfolio</div>
+    <nav class="nav-menu">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="about.html" class="nav-link">About</a>
+      <a href="work.html" class="nav-link">My Work</a>
+      <a href="journal.html" class="nav-link active">Journal</a>
+      <a href="reflection.html" class="nav-link">Reflection</a>
+      <a href="skills.html" class="nav-link">Skills</a>
+      <a href="outlook.html" class="nav-link">Outlook</a>
+      <a href="contact.html" class="nav-link">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<main class="container">
+  <!-- HERO -->
+  <section class="section journal-hero fade-up">
+    <div class="section-header">
+      <p class="section-kicker">Weekly Learning Journal</p>
+      <h1 class="section-title">Weeks 16–33 · Mandai Wildlife Group</h1>
+      <p class="section-subtitle">
+        This journal traces my growth from finalising an RPA bot and producing
+        organisation-wide videos, to redesigning digital platforms, supporting innovation events and
+        deepening my skills in AI, cloud and automation.
+      </p>
+    </div>
+  </section>
+
+  <!-- MONTHLY REFLECTIONS -->
+  <section class="section fade-up">
+    <h2 class="section-title">Monthly Reflections</h2>
+    <p class="section-subtitle">
+      These reflections summarise my key learning themes, mapped to my role as an aspiring
+      AI &amp; RPA Engineer and to the Guided Work-Based Learning outcomes.
+    </p>
+
+    <div class="reflection-grid">
+      <!-- June & July -->
+      <article class="reflection-card reveal">
+        <h2>June &amp; July · From Technical Delivery to Human-Centred Work</h2>
+        <small>Procurement RPA Bot · Copilot Prompt Engineering · MyProject100K · Guest Journey Mapping</small>
+        <p>
+          Over the next two months of my internship at Mandai Wildlife Group, my role evolved
+          significantly—from technical execution to strategic involvement and creative storytelling.
+          I began by finalising the Procurement Department’s RPA Bot. Over several weeks, I iteratively
+          developed the solution, conducted demos, and gathered feedback from Procurement Department, including
+          the Head of Procurement. My goal was to automate repetitive tasks and improve
+          cross-department workflows, mapping directly to my learning outcomes in AI agents and RPA
+          systems deployment. Working closely with business users deepened my understanding of
+          stakeholder expectations and reinforced my skill in managing real-world automation projects.
+        </p>
+        <p>
+          Beyond technical delivery, I took on prompt engineering for Microsoft Copilot 365 where I was analysing
+          hallucinations, refining prompts for domain-specific queries such as Mandai park pricing, and
+          exploring Microsoft add-ins to enhance staff productivity. These tasks highlighted gaps in my
+          understanding of LLM limitations and data governance; I closed them through self-led research,
+          supervisor consultations and iterative prompt testing. In parallel, I produced video content for
+          the MyProject100K Award Ceremony and mapped the guest journey on MIRO using
+          Design Thinking. Across these experiences I learned that digital transformation is not just about
+          tools, but about empathy, clarity and collaboration.
+        </p>
+      </article>
+
+      <!-- August & September -->
+      <article class="reflection-card reveal">
+        <h2>August &amp; September · Strategic Projects & Communication</h2>
+        <small>AI Agent Prototype · AEIOU Learning Festival · TO Sharepoint Website · Cloud Learning</small>
+        <p>
+          During August and September, my experience shifted toward a blend of strategic projects,
+          technical experimentation and communication initiatives. I completed the final stages of the
+          MyProject100K videos, taking responsibility for AV systems and slide cues during the dry run
+          and actual award ceremony. The pressure of live operations taught me preparation, ownership and quick
+          problem-solving. At the same time, I experimented with an AI Agent prototype using n8n and
+          ChatGPT API, testing API integrations to generate weekly newsletters. By mid-August, we decided
+          the prototype was not technically or financially viable. I learnt a valuable lesson in responsible
+          innovation and knowing when to retire an idea.
+        </p>
+        <p>
+          September moved me into platform and content work: redesigning the Transformation Office
+          website, building an AEIOU Learning Festival microsite and producing a newsletter and recap
+          video. Feedback loops with colleagues sharpened my storytelling and UX decisions. Industry
+          visits such as the Databricks Data &amp; AI Expo and discussions with SIT adult learners
+          broadened my understanding of data architecture, design thinking and lean methodologies. In
+          parallel, I prepared for the AWS Cloud Practitioner certification and scoped a new SAP
+          automation use case with Procurement. These months strengthened my decision-making,
+          prioritisation and ability to connect technical solutions to real organisational needs.
+        </p>
+      </article>
+    </div>
+  </section>
+
+  <!-- WEEKLY TIMELINE -->
+  <section class="section fade-up">
+    <div class="section-header">
+      <h2 class="section-title">Weekly Timeline · Detailed Log</h2>
+      <p class="section-subtitle">
+        Each week below captures my day-to-day tasks, mapped to different phases of the internship –
+        from MyProject100K and AI experimentation, to RPA deployment, platform redesign and innovation
+        events. Click on a week to expand the full daily log.
+      </p>
+    </div>
+
+    <div class="timeline-wrapper">
+
+      <!-- WEEK 16 -->
+      <details class="timeline-card reveal" open>
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 16 · MyProject100K Filming &amp; Guest Journey Mapping</span>
+                <span class="timeline-dates">28 Jul – 1 Aug</span>
+              </div>
+              <p class="timeline-summary">
+                Filmed one-minute videos for multiple MyProject100K teams and mapped the guest journey on
+                MIRO, taking different perspectives into account.
+              </p>
+              <div class="chip-row">
+                <span class="chip">MyProject100K</span>
+                <span class="chip">Guest Journey</span>
+                <span class="chip">Storytelling</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>28 July</strong> – Filmed the one-minute video for a MyProject100K Award Ceremony team.</li>
+            <li><strong>29 July</strong> – Worked on mapping the guest journey on MIRO, exploring as many touchpoints
+              and perspectives as possible.</li>
+            <li><strong>30 July</strong> – Filmed one-minute videos for two additional MyProject100K teams.</li>
+            <li><strong>31 July</strong> – Edited footage for all three MyProject100K teams.</li>
+            <li><strong>1 August</strong> – On sick leave.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 17 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 17 · Completing MyProject100K Videos &amp; Starting AI Agent</span>
+                <span class="timeline-dates">4 – 8 Aug</span>
+              </div>
+              <p class="timeline-summary">
+                Wrapped up filming and editing for MyProject100K, and proposed an AI Agent prototype to my supervisor.
+              </p>
+              <div class="chip-row">
+                <span class="chip">MyProject100K</span>
+                <span class="chip">AI Agent</span>
+                <span class="chip">Power Automate</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>4 August</strong> – Filmed footage for the last MyProject100K Award Ceremony team.</li>
+            <li><strong>5 August</strong> – Edited the footage captured the previous day.</li>
+            <li><strong>6 August</strong> – Proposed the use of AI Agents in Mandai to my supervisor, who asked me to
+              experiment and build a prototype.</li>
+            <li><strong>7 August</strong> – Developed the AI Agent prototype and started building the scoring system
+              using Power Automate Cloud Flow for MyProject100K Award Ceremony, including a demo video.</li>
+            <li><strong>8 August</strong> – Researched API connections to integrate into the AI Agent.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 18 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 18 · Iterating on AI Agent &amp; Bloopers</span>
+                <span class="timeline-dates">11 – 15 Aug</span>
+              </div>
+              <p class="timeline-summary">
+                Continued building the AI Agent prototype, produced a blooper compilation, and participated
+                in an AEIOU workshop focused on customer journey mapping.
+              </p>
+              <div class="chip-row">
+                <span class="chip">AI Agent</span>
+                <span class="chip">Video Editing</span>
+                <span class="chip">AEIOU Workshop</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>11 August</strong> – Worked on the AI Agent prototype.</li>
+            <li><strong>12 August</strong> – Created the blooper compilation video for MyProject100K.</li>
+            <li><strong>13 August</strong> – Continued development of the AI Agent prototype.</li>
+            <li><strong>14 August</strong> – Discontinued the AI Agent prototype after assessing technical and economic
+              feasibility; attended an AEIOU ways-of-working workshop and mapped the customer journey.</li>
+            <li><strong>15 August</strong> – Prepared slides for the upcoming MyProject100K Award Ceremony.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 19 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 19 · MyProject100K Ceremony &amp; Advanced Analytics</span>
+                <span class="timeline-dates">18 – 22 Aug</span>
+              </div>
+              <p class="timeline-summary">
+                Managed AV for the MyProject100K dry run and ceremony, while starting Google’s Advanced
+                Data Analytics course and supporting Wi-Fi testing in the parks.
+              </p>
+              <div class="chip-row">
+                <span class="chip">AV Direction</span>
+                <span class="chip">Data Analytics</span>
+                <span class="chip">Networking</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>18 August</strong> – Supported the MyProject100K dry run, handling AV systems and slide
+              direction; resolved several issues on the spot.</li>
+            <li><strong>19 August</strong> – Started Google’s Advanced Data Analytics course via SGInnovate’s Google
+              Learning Programme.</li>
+            <li><strong>20 August</strong> – Attended the MyProject100K Award Ceremony where our five videos and the
+              related townhall video were screened.</li>
+            <li><strong>21 August</strong> – Conducted Wi-Fi testing and troubleshooting across indoor attractions.</li>
+            <li><strong>22 August</strong> – Continued the Advanced Data Analytics course.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 20 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 20 · Scoping Phase 2 Procurement RPA</span>
+                <span class="timeline-dates">25 – 29 Aug</span>
+              </div>
+              <p class="timeline-summary">
+                Scoped the second wave of Procurement RPA/DPA projects, continued development work and was
+                featured by external partners including IMDA and the CEO’s farewell video.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Procurement RPA</span>
+                <span class="chip">VBA</span>
+                <span class="chip">External Recognition</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>25 August</strong> – Met with the Procurement Department to discuss the second set of RPA/DPA
+              projects.</li>
+            <li><strong>26 August</strong> – Worked on the second set of Procurement RPA projects; was invited by IMDA
+              for a LinkedIn feature and photoshoot, and to be featured in the CEO Mike Barclay’s farewell video.</li>
+            <li><strong>27 August</strong> – Continued working on the new Procurement RPA projects and started learning
+              VBA for automation.</li>
+            <li><strong>28 August</strong> – Continued development of the Procurement RPA projects.</li>
+            <li><strong>29 August</strong> – Further work on the second set of Procurement RPA projects.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 21 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 21 · TO Website Redesign &amp; SIT Collaboration</span>
+                <span class="timeline-dates">1 – 5 Sep</span>
+              </div>
+              <p class="timeline-summary">
+                Began a full redesign of the Transformation Office website and learned how adult learners
+                apply design thinking and lean methodologies for business process optimisation.
+              </p>
+              <div class="chip-row">
+                <span class="chip">SharePoint</span>
+                <span class="chip">Design Thinking</span>
+                <span class="chip">Mentorship</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>1 September</strong> – Started redesigning the Transformation Office website.</li>
+            <li><strong>2 September</strong> – Attended a mentoring session and met SIT adult learners to discuss
+              procurement process optimisation using design thinking.</li>
+            <li><strong>3 September</strong> – Continued the website redesign work.</li>
+            <li><strong>4 September</strong> – Justified the purchase of a premium video editing tool to my supervisor and
+              continued redesigning the website.</li>
+            <li><strong>5 September</strong> – Went through the design thinking process to guide the website revamp.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 22 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 22 · Learning Festival Microsite &amp; Data &amp; AI Expo</span>
+                <span class="timeline-dates">8 – 12 Sep</span>
+              </div>
+              <p class="timeline-summary">
+                Coded a web page for the Learning Festival, proposed better project documentation,
+                visited the Databricks Data &amp; AI Expo and began creating a dedicated event website.
+              </p>
+              <div class="chip-row">
+                <span class="chip">AEIOU Microsite</span>
+                <span class="chip">Data &amp; AI Expo</span>
+                <span class="chip">Process Documentation</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>8 September</strong> – Created a new web page for an upcoming Learning Festival and
+              discussed potential AWS hosting and cost management.</li>
+            <li><strong>9 September</strong> – Reviewed procurement processes before and after RPA, refined the
+              SharePoint page and proposed better project documentation and a future TO chatbot.</li>
+            <li><strong>10 September</strong> – Attended the Databricks Data &amp; AI Expo, visiting multiple booths and
+              speaking with professionals from AWS and Google Cloud.</li>
+            <li><strong>11 September</strong> – Proposed a new Learning Festival idea to my supervisor and began
+              building a website for the event.</li>
+            <li><strong>12 September</strong> – Continued building the event website.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 23 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 23 · AEIOU Festival &amp; Industry Visits</span>
+                <span class="timeline-dates">15 – 19 Sep</span>
+              </div>
+              <p class="timeline-summary">
+                Fine-tuned the event website, attended an AWS Tech Talk, manned an AEIOU booth, and
+                visited SMRT to learn about operational technology and risk monitoring.
+              </p>
+              <div class="chip-row">
+                <span class="chip">AEIOU Booth</span>
+                <span class="chip">AWS Tech Talk</span>
+                <span class="chip">Industry Visit</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>15 September</strong> – Implemented UX tweaks to the event website.</li>
+            <li><strong>16 September</strong> – Attended an AWS Tech Talk organised by SGInnovate.</li>
+            <li><strong>17 September</strong> – Manned an AEIOU Learning Festival booth at Singapore Zoo and joined a
+              meeting with SIT participants on design thinking and lean methodologies.</li>
+            <li><strong>18 September</strong> – Visited SMRT to learn about their operations control centres and risk
+              monitoring systems.</li>
+            <li><strong>19 September</strong> – Continued revamping the Transformation Office website.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 24 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 24 · AEIOU Newsletter &amp; AWS Exam Prep</span>
+                <span class="timeline-dates">22 – 26 Sep</span>
+              </div>
+              <p class="timeline-summary">
+                Edited AEIOU festival footage, produced a newsletter, presented it to the team and took
+                time off while preparing for the AWS Cloud Practitioner exam.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Newsletter</span>
+                <span class="chip">Video Editing</span>
+                <span class="chip">AWS CCP Prep</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>22 September</strong> – Edited AEIOU Learning Festival footage and completed the AEIOU
+              Foundations Course newsletter.</li>
+            <li><strong>23 September</strong> – Presented the newsletter and video footage during the Transformation
+              Office weekly meeting.</li>
+            <li><strong>24 September</strong> – Prepared for the AWS Cloud Practitioner certification.</li>
+            <li><strong>25–26 September</strong> – I was sick so I was on leave.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 25 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 25 · AWS Prep &amp; SAP RPA Discussion</span>
+                <span class="timeline-dates">29 Sep – 3 Oct</span>
+              </div>
+              <p class="timeline-summary">
+                Focused on AWS certification prep, explored a potential SAP automation use case and
+                continued strengthening the Procurement RPA bot and AEIOU video storyboards.
+              </p>
+              <div class="chip-row">
+                <span class="chip">AWS CCP</span>
+                <span class="chip">SAP Automation</span>
+                <span class="chip">Storyboarding</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>29 September</strong> – Continued preparation for the AWS Cloud Practitioner exam.</li>
+            <li><strong>30 September</strong> – Met Procurement to discuss potential SAP automation with RPA.</li>
+            <li><strong>1 October</strong> – Worked on video editing, the Procurement RPA Robot and distribution of
+              AEIOU Learning Festival gift cards.</li>
+            <li><strong>2 October</strong> – Faced issues with the RPA bot and raised them to IT; continued AWS exam
+              preparation.</li>
+            <li><strong>3 October</strong> – Created two new storyboards for AEIOU Innovation Behaviours videos.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 26 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 26 · Deploying RPA &amp; Advanced Image Recognition</span>
+                <span class="timeline-dates">6 – 10 Oct</span>
+              </div>
+              <p class="timeline-summary">
+                Focused on deployment planning for the Procurement RPA bot, including cost discussions,
+                and experimented with advanced image recognition models for UI automation.
+              </p>
+              <div class="chip-row">
+                <span class="chip">RPA Deployment</span>
+                <span class="chip">Image Recognition</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>6 October</strong> – Met SIT adult learners again as they supported Procurement using lean and
+              design thinking approaches.</li>
+            <li><strong>7 October</strong> – Prepared to deploy the Procurement RPA Bot and planned to discuss the
+              unattended robot cost (~$2,330) with Procurement.</li>
+            <li><strong>8 October</strong> – Used the “Advanced” image recognition model to identify elements on the new
+              machine interface.</li>
+            <li><strong>9–10 October</strong> – Continued working on the Procurement RPA Robot.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 27 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 27 · RPA Progress &amp; AWS Solutions Architect Cloud Quest</span>
+                <span class="timeline-dates">13 – 17 Oct</span>
+              </div>
+              <p class="timeline-summary">
+                Captured AEIOU contest moments, deepened AWS architecture knowledge, and prepared RPA
+                statistics to present to leadership.
+              </p>
+              <div class="chip-row">
+                <span class="chip">RPA Progress</span>
+                <span class="chip">AWS Solutions Architect</span>
+                <span class="chip">Exec Presentation</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>13 October</strong> – Took final photos of AEIOU Innovation Behaviours contest winners and
+              continued RPA development.</li>
+            <li><strong>14–15 October</strong> – Worked through AWS Solutions Architect Cloud Quest to deepen cloud
+              solution skills.</li>
+            <li><strong>16 October</strong> – Reviewed RPA project progress with Procurement and prepared statistics for
+              presentation to Deputy CEO Belina, Chief Information Officer and the internal Trnasformation Project Committee.</li>
+            <li><strong>17 October</strong> – Continued work on the Procurement RPA Robot.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 28 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 28 · Deepavali &amp; Leave</span>
+                <span class="timeline-dates">20 – 24 Oct</span>
+              </div>
+              <p class="timeline-summary">
+                Public holiday and scheduled leave period before returning to focus on RPA and
+                innovation work.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Rest</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>20 October</strong> – Deepavali public holiday.</li>
+            <li><strong>21–24 October</strong> – On leave.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 29 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 29 · RPA Approval &amp; SWITCH Event</span>
+                <span class="timeline-dates">27 – 31 Oct</span>
+              </div>
+              <p class="timeline-summary">
+                Secured leadership approval for a VM and unattended licence, and attended Singapore
+                Week of Innovation &amp; Technology with colleagues.
+              </p>
+              <div class="chip-row">
+                <span class="chip">RPA Approval</span>
+                <span class="chip">Innovation &amp; Tech</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>27 October</strong> – On leave.</li>
+            <li><strong>28 October</strong> – Returned from leave and continued work on the Procurement RPA Robot.</li>
+            <li><strong>29 October</strong> – Presented the RPA project to the internal project committee and Deputy
+              CEO; obtained approval from the CIO for VM provisioning and an unattended licence.</li>
+            <li><strong>30 October</strong> – Attended Singapore Week of Innovation &amp; Technology at Marina Bay
+              Sands.</li>
+            <li><strong>31 October</strong> – Continued working on the RPA Robot.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 30 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 30 · Data Engineering &amp; Robotics Exposure</span>
+                <span class="timeline-dates">3 – 7 Nov</span>
+              </div>
+              <p class="timeline-summary">
+                Attended a Databricks–Microsoft data engineering workshop, visited HopeTechnik to see
+                robotics use cases and resumed RPA development.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Data Engineering</span>
+                <span class="chip">Robotics</span>
+                <span class="chip">RPA</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>3 November</strong> – Attended an Introduction to Data Engineering workshop by Databricks and
+              Microsoft.</li>
+            <li><strong>4 November</strong> – Visited HopeTechnik to learn about their robots and use cases.</li>
+            <li><strong>5–6 November</strong> – On leave.</li>
+            <li><strong>7 November</strong> – Continued working on the Procurement RPA Robot.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 31 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 31 · Mandai Innovation Forum Preperation</span>
+                <span class="timeline-dates">10 – 14 Nov</span>
+              </div>
+              <p class="timeline-summary">
+                Planned logistics for the Mandai Innovation Forum, revisited learnings from earlier data
+                events and explored feasibility of a second RPA project related to SAP.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Innovation Forum</span>
+                <span class="chip">RPA Feasibility</span>
+                <span class="chip">Budgeting</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>10 November</strong> – Discussed logistics for the upcoming Mandai Innovation Forum.</li>
+            <li><strong>11 November</strong> – Reviewed reflections from the Databricks and AWS events and considered
+              feasibility for a second Procurement RPA (PR–PO conversion in SAP).</li>
+            <li><strong>12 November</strong> – Supported the Mandai Innovation Forum dry run.</li>
+            <li><strong>13 November</strong> – Joined Bluesky team building to discuss budgets and cost optimisation for
+              next year.</li>
+            <li><strong>14 November</strong> – Worked on the RPA Robot, focusing on one final feature.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 32 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 32 · Finalising RPA &amp; Innovation Forum Delivery</span>
+                <span class="timeline-dates">17 – 21 Nov</span>
+              </div>
+              <p class="timeline-summary">
+                Completed the final RPA feature, supported the Mandai Innovation Forum AV operations, and
+                continued professional development through Opportunity Fest.
+              </p>
+              <div class="chip-row">
+                <span class="chip">RPA Final Feature</span>
+                <span class="chip">Innovation Forum</span>
+                <span class="chip">Career Exploration</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>17 November</strong> – Completed the final feature for the Procurement RPA Robot.</li>
+            <li><strong>18 November</strong> – Discussed learning reflections and RPA updates with my supervisor.</li>
+            <li><strong>19 November</strong> – Managed AV during the Mandai Innovation Forum.</li>
+            <li><strong>20 November</strong> – Attended Temasek Polytechnic’s Opportunity Fest to better understand
+              employer expectations.</li>
+            <li><strong>21 November</strong> – Continued refining the final RPA feature.</li>
+          </ul>
+        </div>
+      </details>
+
+      <!-- WEEK 33 -->
+      <details class="timeline-card reveal">
+        <summary>
+          <div class="summary-row">
+            <div>
+              <div class="timeline-meta">
+                <span class="timeline-week">Week 33 · Closing the Loop &amp; Building this Portfolio</span>
+                <span class="timeline-dates">24 – 28 Nov</span>
+              </div>
+              <p class="timeline-summary">
+                Officially completed Procurement RPA Robot development, joined an internal Prompt-a-thon
+                and started coding this digital portfolio from scratch.
+              </p>
+              <div class="chip-row">
+                <span class="chip">RPA Completion</span>
+                <span class="chip">Prompt Engineering</span>
+                <span class="chip">Digital Portfolio</span>
+              </div>
+            </div>
+            <div class="expand-indicator">›</div>
+          </div>
+        </summary>
+        <div class="timeline-body">
+          <ul>
+            <li><strong>24 November</strong> – Finished development of the Procurement RPA Robot.</li>
+            <li><strong>25 November</strong> – Participated in an internal “Prompt-a-thon” run by SoftwareOne,
+              Microsoft and my Supervisor.</li>
+            <li><strong>26 November</strong> – Started coding this digital portfolio for Guided Work-Based Learning 2.</li>
+            <li><strong>27 November</strong> – Continued developing the digital portfolio.</li>
+            <li><strong>28 November</strong> – Further refined the digital portfolio and journal entries.</li>
+          </ul>
+        </div>
+      </details>
+
+    </div>
+  </section>
+</main>
+
+<footer class="container">
+  © 2025 Moanish Ashok Kumar · Weekly Journal
+</footer>
+
+<script>
+  // Soft reveal animation using IntersectionObserver
+  document.addEventListener("DOMContentLoaded", () => {
+    const revealEls = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.15 }
+    );
+
+    revealEls.forEach((el) => observer.observe(el));
+  });
+</script>
+</body>
+</html>
