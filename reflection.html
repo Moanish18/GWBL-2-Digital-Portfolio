@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Reflection – Mandai Internship Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    /* --- VISUAL ENHANCEMENTS --- */
+    .reflection-section {
+      padding: 2rem;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      backdrop-filter: blur(12px);
+      margin-bottom: 3rem;
+      animation: fadeUp 0.8s ease;
+    }
+
+    .reflection-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #38bdf8;
+    }
+
+    .reflection-icon {
+      font-size: 2.2rem;
+      margin-right: 0.6rem;
+      vertical-align: middle;
+    }
+
+    .reflection-text {
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: #dce7f3;
+      margin-bottom: 1rem;
+    }
+
+    .highlight-box {
+      padding: 1.2rem;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #38bdf8;
+      background: rgba(56, 189, 248, 0.08);
+      border-radius: 12px;
+      font-size: 1.05rem;
+      color: #e8f4ff;
+    }
+
+    .reflection-list li {
+      margin-bottom: 0.6rem;
+      line-height: 1.6;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(25px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="nav-brand">Digital Portfolio</div>
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="work.html" class="nav-link">My Work</a>
+        <a href="journal.html" class="nav-link">Journal</a>
+        <a href="reflection.html" class="nav-link active">Reflection</a>
+        <a href="skills.html" class="nav-link">Skills</a>
+        <a href="outlook.html" class="nav-link">Outlook</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="section fade-up">
+      <div class="section-header">
+        <p class="section-kicker">Reflection</p>
+        <h1 class="section-title">A Deep Reflection on My Internship Growth</h1>
+        <p class="section-subtitle">
+          This reflection consolidates what I learned, the challenges I faced, and how my identity as an AI & RPA
+          Engineer evolved throughout Weeks 16–33.
+        </p>
+      </div>
+
+      <!-- ========================= -->
+      <!--     NATURE OF WORK        -->
+      <!-- ========================= -->
+      <div class="reflection-section">
+        <h2 class="reflection-title"><span class="reflection-icon">🧩</span>Nature of Work</h2>
+
+        <p class="reflection-text">
+          My work at Mandai Wildlife Group spanned technical automation development, creative content production,
+          digital
+          platform redesigns, and supporting organisation-wide innovation events. Each task required a distinct
+          combination of
+          technical depth, communication skills, and operational awareness.
+        </p>
+
+        <p class="reflection-text">
+          A major responsibility was developing the <strong>Procurement RPA Bot</strong> which was an end-to-end
+          automation that
+          extracts RFQ/Tender data from Sesami, downloads files, classifies them, and uploads them into SharePoint.
+          Beyond technical implementation, this involved gathering requirements, validating workflows, and ensuring that
+          the
+          bot aligned with the procurement team’s real operational constraints.
+        </p>
+
+        <p class="reflection-text">
+          In parallel, I worked on <strong>MyProject100K video production</strong>, <strong>Transformation Office
+            SharePoint redesign</strong>,
+          <strong>Learning Festival content creation</strong>, and <strong>AI experimentation for Copilot 365</strong>.
+          These responsibilities expanded
+          my role beyond pure technical execution into communication, user experience design, and cross-department
+          collaboration.
+        </p>
+
+        <div class="highlight-box">
+          <strong>Key Insight:</strong> My role grew from “task executor” to a multidisciplinary contributor who
+          connected
+          technology, storytelling, and operational needs into cohesive solutions.
+        </div>
+      </div>
+
+      <!-- ========================= -->
+      <!--     CHALLENGES FACED      -->
+      <!-- ========================= -->
+      <div class="reflection-section">
+        <h2 class="reflection-title"><span class="reflection-icon">⚠️</span>Challenges Faced</h2>
+
+        <p class="reflection-text">
+          The most significant challenges emerged during the development of the Procurement RPA Bot. The Sesami portal
+          UI
+          changed frequently, resulting in broken selectors and unpredictable behaviour. Some vendors uploaded no
+          documents,
+          requiring me to design fallback logic that printed the web page as evidence instead.
+        </p>
+
+        <p class="reflection-text">
+          Another challenge was balancing innovation with feasibility during the <strong>AI Agent Prototype</strong>.
+          While technically exciting, the prototype required complex API orchestration and ongoing licensing costs.
+          My supervisor and I eventually decided to discontinue the project.
+        </p>
+
+        <p class="reflection-text">
+          Creative projects brought their own difficulties such as tight deadlines for video editing, coordinating
+          filming with
+          operational teams, and preparing AV systems for live events like the MyProject100K Ceremony and the Mandai
+          Innovation Forum.
+        </p>
+
+        <div class="highlight-box">
+          <strong>What I Learned:</strong> Challenges were not obstacles but signals as they revealed where my
+          assumptions
+          needed to be corrected, where the business needed clarity and where technically elegant solutions might not be
+          operationally practical.
+        </div>
+      </div>
+
+      <!-- ========================= -->
+      <!--     LEARNING & GROWTH     -->
+      <!-- ========================= -->
+      <div class="reflection-section">
+        <h2 class="reflection-title"><span class="reflection-icon">🌱</span>Learning & Growth</h2>
+
+        <p class="reflection-text">
+          Throughout the internship, I experienced significant growth in both technical capability and professional
+          maturity.
+          Completing the RPA Bot strengthened my skills in workflow design, exception handling, API-based file uploads,
+          datatable manipulation, and UI resilience patterns.
+        </p>
+
+        <p class="reflection-text">
+          My work with Copilot 365 expanded my understanding of prompt engineering and responsible AI deployment.
+          Analysing hallucinations and studying information retrieval limitations helped me develop safer, more
+          predictable
+          prompt structures which will be a skill directly applicable to my future AI development work.
+        </p>
+
+        <p class="reflection-text">
+          I also grew creatively. Filming and editing videos, designing SharePoint pages, and producing microsites
+          improved my storytelling and communication skills. These skills proved essential when presenting updates to
+          senior leadership, explaining automation logic to non-technical staff or running AV for organisation-wide
+          events.
+        </p>
+
+        <div class="highlight-box">
+          <strong>Growth Mindset:</strong> I learned to iterate fast, document rigorously, communicate clearly and
+          remain
+          adaptable even when projects shifted direction.
+        </div>
+      </div>
+
+      <!-- ========================= -->
+      <!--      ACCOMPLISHMENTS      -->
+      <!-- ========================= -->
+      <div class="reflection-section">
+        <h2 class="reflection-title"><span class="reflection-icon">🏆</span>Accomplishments</h2>
+
+        <p class="reflection-text">
+          Across Weeks 16–33, I delivered multiple high-impact outcomes:
+        </p>
+
+        <ul class="reflection-list">
+          <li><strong>Completed the Procurement RPA Bot</strong> with full documentation, demos, and successful
+            handover.</li>
+          <li><strong>Produced five MyProject100K videos</strong> showcased during the organisation’s award ceremony.
+          </li>
+          <li><strong>Redesigned the Transformation Office SharePoint site</strong> to improve usability and branding.
+          </li>
+          <li><strong>Created the Learning Festival microsite</strong> and a full AEIOU recap newsletter + video.</li>
+          <li><strong>Supported AV operations</strong> for the MyProject100K Ceremony & Mandai Innovation Forum.</li>
+          <li><strong>Attended industry events</strong> (Databricks Expo, AWS Tech Talk, Data Engineering Workshop) to
+            expand my professional knowledge.</li>
+          <li><strong>Received approval from Deputy CEO</strong> to provision a VM & unattended bot licence for RPA
+            deployment.</li>
+        </ul>
+
+        <div class="highlight-box">
+          These achievements demonstrate not just technical skill, but initiative, ownership, collaboration and the
+          ability
+          to contribute meaningfully to real organisational needs.
+        </div>
+      </div>
+
+    </section>
+  </main>
+
+  <footer class="container">
+    © 2025 Moanish Ashok Kumar · Reflection
+  </footer>
+</body>
+
+</html>
