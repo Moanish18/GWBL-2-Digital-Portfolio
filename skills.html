@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Skills – Mandai Internship Portfolio</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Extra Styling Boost (Lightweight, No External Libs) -->
+  <style>
+    /* ==== PAGE ENHANCEMENTS – DARK THEME MATCHED ==== */
+
+    .skills-hero {
+      background: radial-gradient(circle at top left,
+          rgba(56, 189, 248, 0.12),
+          rgba(15, 23, 42, 0.6));
+      backdrop-filter: blur(14px);
+      border-radius: 22px;
+      padding: 3rem;
+      margin-bottom: 4rem;
+      text-align: center;
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      box-shadow: 0 8px 40px rgba(0, 0, 0, 0.55);
+      animation: fadeUp 0.8s ease-out;
+    }
+
+    .skills-hero h1 {
+      color: var(--primary);
+      font-size: 2.1rem;
+      margin-bottom: 1rem;
+    }
+
+    .skills-hero p {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    /* ==== SKILL CHIPS ==== */
+    .sexy-skill-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.2rem;
+      justify-content: center;
+    }
+
+    .sexy-chip {
+      padding: 10px 18px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid rgba(56, 189, 248, 0.28);
+      border-radius: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      font-size: 0.92rem;
+      box-shadow: 0 0 12px rgba(56, 189, 248, 0.12);
+      transition: 0.25s;
+    }
+
+    .sexy-chip:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 0 22px rgba(56, 189, 248, 0.4);
+      background: rgba(15, 23, 42, 0.65);
+      border-color: rgba(56, 189, 248, 0.55);
+    }
+
+    /* ==== SKILL CARDS ==== */
+    .skill-card {
+      background: radial-gradient(circle at 0% 0%,
+          rgba(56, 189, 248, 0.14),
+          transparent 45%),
+        radial-gradient(circle at 100% 100%,
+          rgba(79, 70, 229, 0.12),
+          transparent 55%),
+        var(--card);
+      border-radius: 20px;
+      padding: 2rem;
+      border: 1px solid rgba(56, 189, 248, 0.22);
+      box-shadow: var(--shadow-soft);
+      animation: fadeUp 1s ease;
+    }
+
+    .skill-card h2 {
+      margin-bottom: 1rem;
+      color: var(--primary);
+    }
+
+    /* ==== RADAR CHART (Dark Theme) ==== */
+    .radar-container {
+      max-width: 450px;
+      margin: 3rem auto;
+    }
+
+    .radar-container svg polygon {
+      stroke: rgba(56, 189, 248, 0.55);
+    }
+
+    .radar-label {
+      text-align: center;
+      margin-top: 1rem;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    /* ==== SKILLS TABLE ==== */
+    .skills-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 2rem;
+      border-radius: 18px;
+      overflow: hidden;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(56, 189, 248, 0.25);
+    }
+
+    .skills-table th {
+      background: linear-gradient(135deg,
+          rgba(56, 189, 248, 0.4),
+          rgba(79, 70, 229, 0.4));
+      padding: 14px;
+      text-align: left;
+      color: var(--text-main);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .skills-table td {
+      padding: 14px;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid rgba(56, 189, 248, 0.12);
+    }
+
+    .skills-table tr:hover td {
+      background: rgba(56, 189, 248, 0.08);
+      color: var(--primary);
+    }
+
+    /* ==== ANIMATIONS ==== */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ============================
+   CYBER MANDAl × AWS RADAR CHART
+   ============================ */
+
+    .radar-wrapper {
+      display: flex;
+      justify-content: center;
+      margin: 3rem 0;
+    }
+
+    .radar-chart {
+      max-width: 700px;
+      filter: drop-shadow(0 0 25px rgba(56, 189, 248, 0.25));
+    }
+
+    .radar-grid circle {
+      fill: none;
+      stroke: rgba(148, 163, 184, 0.25);
+      stroke-width: 1.2px;
+    }
+
+    .radar-axes line {
+      stroke: rgba(148, 163, 184, 0.45);
+      stroke-width: 1.3px;
+    }
+
+    .radar-shape {
+      fill: rgba(56, 189, 248, 0.28);
+      /* cyan glow */
+      stroke: #22c55e;
+      /* mandai green outline */
+      stroke-width: 3px;
+      filter: drop-shadow(0 0 12px rgba(34, 197, 94, 0.55));
+      animation: radarPulse 3.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes radarPulse {
+      0% {
+        transform: scale(0.98);
+        opacity: 0.85;
+      }
+
+      100% {
+        transform: scale(1.02);
+        opacity: 1;
+      }
+    }
+
+    .radar-points circle {
+      fill: #38bdf8;
+      stroke: #22c55e;
+      stroke-width: 2px;
+      filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.8));
+    }
+
+    .radar-label {
+      fill: var(--text-muted);
+      font-size: 0.9rem;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.7);
+    }
+
+    /* ===== SUPER CLEAN SEXY RADAR UPGRADE ===== */
+
+    .radar-chart.sexy {
+      max-width: 600px;
+      opacity: 0.98;
+      filter: drop-shadow(0 0 35px rgba(56, 189, 248, 0.22));
+      transition: transform 0.4s ease;
+    }
+
+    .radar-chart.sexy:hover {
+      transform: scale(1.015);
+    }
+
+    /* GRID */
+    .radar-grid circle {
+      fill: none;
+      stroke: rgba(148, 163, 184, 0.18);
+      stroke-width: 1.4px;
+    }
+
+    /* AXES */
+    .radar-axes line {
+      stroke: rgba(148, 163, 184, 0.28);
+      stroke-width: 1.5px;
+    }
+
+    /* POLYGON SHAPE — smoother & glowing */
+    .radar-shape {
+      fill: rgba(56, 189, 248, 0.22);
+      stroke: #22c55e;
+      stroke-width: 3.2px;
+      filter: drop-shadow(0 0 18px rgba(34, 197, 94, 0.65));
+      animation: radarPulse 3.8s ease-in-out infinite alternate;
+    }
+
+    @keyframes radarPulse {
+      0% {
+        transform: scale(0.985);
+        opacity: 0.88;
+      }
+
+      100% {
+        transform: scale(1.01);
+        opacity: 1;
+      }
+    }
+
+    /* POINTS */
+    .radar-points circle {
+      fill: #38bdf8;
+      stroke: #22c55e;
+      stroke-width: 2.6px;
+      filter: drop-shadow(0 0 10px rgba(56, 189, 248, 0.9));
+    }
+
+    /* LABELS */
+    .radar-label {
+      fill: #e2e8f0;
+      font-size: 0.95rem;
+      font-weight: 600;
+      opacity: 0.9;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.55);
+    }
+
+    .radar-label.center {
+      text-anchor: middle;
+    }
+
+    .radar-label.right {
+      text-anchor: start;
+    }
+
+    .radar-label.left {
+      text-anchor: end;
+    }
+
+    .radar-wrapper {
+      width: 650px;
+      /* bigger display */
+      margin: 0 auto;
+      overflow: visible;
+      /* CRITICAL fix */
+    }
+
+    .radar-chart {
+      width: 100%;
+      height: auto;
+      overflow: visible;
+      /* prevents label clipping */
+    }
+  </style>
+
+</head>
+
+<body>
+  <header class="navbar">
+    <div class="container nav-inner">
+      <div class="nav-brand">Digital Portfolio</div>
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="work.html" class="nav-link">My Work</a>
+        <a href="journal.html" class="nav-link">Journal</a>
+        <a href="reflection.html" class="nav-link">Reflection</a>
+        <a href="skills.html" class="nav-link active">Skills</a>
+        <a href="outlook.html" class="nav-link">Outlook</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container fade-up">
+
+    <!-- HERO INTRO -->
+    <section class="skills-hero">
+      <h1 class="section-title">Skills & Competency Growth</h1>
+      <p>
+        Over Weeks 16–33, my internship at Mandai transformed my technical foundation, strengthened my
+        critical-thinking,
+        and expanded my capability to manage real-world automation, digital platforms, and innovation workflows.
+        This section showcases the competencies I built and how they directly mapped to industry TSCs and CCS
+        expectations.
+      </p>
+    </section>
+
+    <!-- TECHNICAL + INTERPERSONAL SKILLS -->
+    <section class="grid-2">
+      <div class="skill-card">
+        <h2>Technical Skills Strengthened</h2>
+        <div class="sexy-skill-chips">
+          <span class="sexy-chip">Power Automate Desktop & Cloud</span>
+          <span class="sexy-chip">RPA Flow Design & Debugging</span>
+          <span class="sexy-chip">Image Recognition Automation</span>
+          <span class="sexy-chip">API Integration & AI Agents</span>
+          <span class="sexy-chip">VBA for Excel Automation</span>
+          <span class="sexy-chip">SharePoint / Web UX</span>
+          <span class="sexy-chip">Video Editing & AV Systems</span>
+          <span class="sexy-chip">AWS Cloud Fundamentals</span>
+        </div>
+      </div>
+
+      <div class="skill-card">
+        <h2>Interpersonal & Cognitive Skills</h2>
+        <div class="sexy-skill-chips">
+          <span class="sexy-chip">Stakeholder Communication</span>
+          <span class="sexy-chip">Collaboration & Alignment</span>
+          <span class="sexy-chip">Problem Solving (CCS)</span>
+          <span class="sexy-chip">User-Centric Thinking</span>
+          <span class="sexy-chip">Adaptability in Live Events</span>
+          <span class="sexy-chip">Time Management</span>
+          <span class="sexy-chip">Self-Directed Learning</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- RADAR CHART (Visual Skill Summary) -->
+    <section class="section fade-up">
+      <div class="section-header">
+        <p class="section-kicker">Competency Radar</p>
+        <h2 class="section-title">My Strengths at a Glance</h2>
+        <div class="radar-wrapper">
+          <svg viewBox="0 0 560 560" class="radar-chart sexy">
+
+            <!-- GRID -->
+            <g class="radar-grid">
+              <circle cx="280" cy="280" r="210"></circle>
+              <circle cx="280" cy="280" r="165"></circle>
+              <circle cx="280" cy="280" r="120"></circle>
+              <circle cx="280" cy="280" r="75"></circle>
+            </g>
+
+            <!-- AXES -->
+            <g class="radar-axes">
+              <line x1="280" y1="280" x2="280" y2="60"></line>
+              <line x1="280" y1="280" x2="470" y2="230"></line>
+              <line x1="280" y1="280" x2="395" y2="455"></line>
+              <line x1="280" y1="280" x2="165" y2="455"></line>
+              <line x1="280" y1="280" x2="90" y2="230"></line>
+            </g>
+
+            <!-- POLYGON -->
+            <polygon class="radar-shape" points="
+        280,115
+        440,240
+        360,410
+        200,410
+        120,240
+      " />
+
+            <!-- POINTS -->
+            <g class="radar-points">
+              <circle cx="280" cy="115" r="8"></circle>
+              <circle cx="440" cy="240" r="8"></circle>
+              <circle cx="360" cy="410" r="8"></circle>
+              <circle cx="200" cy="410" r="8"></circle>
+              <circle cx="120" cy="240" r="8"></circle>
+            </g>
+
+            <!-- LABELS - moved inward -->
+            <text x="280" y="40" class="radar-label center">RPA Engineering</text>
+            <text x="500" y="240" class="radar-label right">AI & LLM</text>
+            <text x="380" y="505" class="radar-label right">Communication</text>
+            <text x="180" y="505" class="radar-label left">Design Thinking</text>
+            <text x="60" y="240" class="radar-label left">Cloud Fundamentals</text>
+
+          </svg>
+        </div>
+
+    </section>
+
+
+    <!-- TABLE: MAPPING -->
+    <section class="section">
+      <div class="section-header">
+        <p class="section-kicker">Skills Mapping</p>
+        <h2 class="section-title">Linking Tasks to Industry Competencies</h2>
+      </div>
+
+      <table class="skills-table">
+        <thead>
+          <tr>
+            <th>Project / Activity</th>
+            <th>Technical Skill Area (TSC)</th>
+            <th>Core Skill (CCS)</th>
+            <th>Application</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <tr>
+            <td>MyProject100K Video Suite</td>
+            <td>Video Production · Audio/Visual Controls</td>
+            <td>Communication · Teamwork</td>
+            <td>Managed filming, editing, narrative clarity & live event AV.</td>
+          </tr>
+
+          <tr>
+            <td>AI Agent Prototype</td>
+            <td>API Integration · Automation Architecture</td>
+            <td>Critical Evaluation · Creative Thinking</td>
+            <td>Devised prototype, validated feasibility, sunset responsibly.</td>
+          </tr>
+
+          <tr>
+            <td>Procurement RPA Robot – Phase 2</td>
+            <td>RPA Logic · Exception Handling · VBA</td>
+            <td>Problem Solving · Analytical Thinking</td>
+            <td>Debugged issues, built resilience, and presented to Deputy CEO.</td>
+          </tr>
+
+          <tr>
+            <td>TO Website & Learning Festival Pages</td>
+            <td>UX Design · SharePoint Development</td>
+            <td>User-Centric Design · Creative Communication</td>
+            <td>Improved storytelling & navigation for organisation-wide content.</td>
+          </tr>
+
+          <tr>
+            <td>Mandai Innovation Forum</td>
+            <td>Event Coordination · AV Systems</td>
+            <td>Adaptability · Multi-tasking</td>
+            <td>Delivered smooth AV operations under real-time pressure.</td>
+          </tr>
+
+          <tr>
+            <td>Databricks & AWS Tech Events</td>
+            <td>Cloud Computing · Data Architecture</td>
+            <td>Self-Learning · Growth Mindset</td>
+            <td>Integrated industry insights into practical Mandai use cases.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <footer class="container">
+    © 2025 Moanish Ashok Kumar · Skills
+  </footer>
+
+</body>
+
+</html>
