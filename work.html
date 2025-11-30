@@ -566,6 +566,14 @@
     .summary-card ul li {
       margin-bottom: 0.2rem;
     }
+
+    /* Caption */
+    .media-caption {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      margin-top: 0.4rem;
+      text-align: center;
+    }
   </style>
 </head>
 
@@ -1061,26 +1069,32 @@
 
         <div>
           <h3 class="sub-title">Video Strip</h3>
+
           <div class="media-scroller-wrapper">
             <div class="media-scroller">
+
               <div class="media-item media-scroller-item">
-                <video src="videos/Han_Qiang_Team_2_MyProject100K_Awards_Ceremony_Video.mp4" class="lightbox-trigger"
-                  data-full="videos/Han_Qiang_Team_2_MyProject100K_Awards_Ceremony_Video.mp4" controls
-                  playsinline></video>
+                <video src="videos/Han_Qiang_Team_2_MyProject100K_Awards_Ceremony_Video.mp4" controls playsinline
+                  class="strip-video"></video>
                 <div class="media-caption">Han Qiang Team 2 – Data Collation solution video.</div>
               </div>
+
               <div class="media-item media-scroller-item">
-                <video src="videos/Jasmine_MyProject100K_Awards_Ceremony_Video.mp4" class="lightbox-trigger"
-                  data-full="videos/Jasmine_MyProject100K_Awards_Ceremony_Video.mp4" controls playsinline></video>
+                <video src="videos/Jasmine_MyProject100K_Awards_Ceremony_Video.mp4" controls playsinline
+                  class="strip-video"></video>
                 <div class="media-caption">Jasmine’s project video – workflow transformation.</div>
               </div>
+
               <div class="media-item media-scroller-item">
-                <video src="videos/Kelly_MyProject100K_Awards_Ceremony_Video.mp4" class="lightbox-trigger"
-                  data-full="videos/Kelly_MyProject100K_Awards_Ceremony_Video.mp4" controls playsinline></video>
-                <div class="media-caption">Kelly’s team – innovation &amp; process change story.</div>
+                <video src="videos/Kelly_MyProject100K_Awards_Ceremony_Video.mp4" controls playsinline
+                  class="strip-video"></video>
+                <div class="media-caption">Kelly’s team – innovation & process change story.</div>
               </div>
+
             </div>
           </div>
+        </div>
+
 
     </section>
 
@@ -1188,14 +1202,17 @@
   </footer>
 
   <script>
-    // RPA Tabs
     document.addEventListener("DOMContentLoaded", () => {
+      /* =====================================================
+         RPA TABS
+      ===================================================== */
       const tabButtons = document.querySelectorAll(".rpa-tab");
       const tabPanels = document.querySelectorAll(".rpa-tab-panel");
 
       tabButtons.forEach((btn) => {
         btn.addEventListener("click", () => {
           const targetId = btn.dataset.tab;
+
           tabButtons.forEach((b) => b.classList.remove("active"));
           btn.classList.add("active");
 
@@ -1205,12 +1222,42 @@
         });
       });
 
-      // Lightbox
+      /* =====================================================
+         VIDEO CONTROL HELPERS
+      ===================================================== */
+
+      // Pause all small scroller videos
+      function pauseAllScrollerVideos() {
+        document.querySelectorAll(".media-scroller video").forEach((v) => {
+          v.pause();
+          v.currentTime = 0;
+        });
+      }
+
+      // Prevent multiple videos from playing at once
+      document.querySelectorAll(".media-scroller video").forEach((video) => {
+        video.addEventListener("play", () => {
+          document.querySelectorAll(".media-scroller video").forEach((other) => {
+            if (other !== video) {
+              other.pause();
+              other.currentTime = 0;
+            }
+          });
+        });
+      });
+
+      /* =====================================================
+         LIGHTBOX
+      ===================================================== */
       const overlay = document.getElementById("lightbox-overlay");
       const content = overlay.querySelector(".lightbox-content");
       const closeBtn = overlay.querySelector(".lightbox-close");
 
       function openLightbox(mediaEl) {
+        // Stop background videos
+        pauseAllScrollerVideos();
+
+        // Clear previous media
         const existing = content.querySelector("img, video");
         if (existing) existing.remove();
 
@@ -1221,8 +1268,8 @@
           cloned = document.createElement("video");
           cloned.src = fullSrc;
           cloned.controls = true;
-          cloned.autoplay = true;
           cloned.playsInline = true;
+          cloned.autoplay = false;  // ⛔ disable autoplay for cleaner UX
         } else {
           cloned = document.createElement("img");
           cloned.src = fullSrc;
@@ -1231,10 +1278,18 @@
 
         content.appendChild(cloned);
         overlay.classList.add("active");
+
+        // Only play when user clicks play
+        if (cloned.tagName === "VIDEO") {
+          cloned.addEventListener("play", () => {
+            cloned.currentTime = 0;
+          });
+        }
       }
 
       document.querySelectorAll(".lightbox-trigger").forEach((el) => {
         el.addEventListener("click", (e) => {
+          e.preventDefault();
           e.stopPropagation();
           openLightbox(el);
         });
@@ -1242,11 +1297,18 @@
 
       function closeLightbox() {
         overlay.classList.remove("active");
+
         const media = content.querySelector("video");
-        if (media) media.pause();
+        if (media) {
+          media.pause();
+          media.currentTime = 0;
+        }
+
+        content.innerHTML = ""; // Clean DOM for safety
       }
 
       closeBtn.addEventListener("click", closeLightbox);
+
       overlay.addEventListener("click", (e) => {
         if (e.target === overlay) closeLightbox();
       });
@@ -1255,6 +1317,18 @@
         if (e.key === "Escape" && overlay.classList.contains("active")) {
           closeLightbox();
         }
+      });
+    });
+  </script>
+  <script>
+    document.querySelectorAll(".strip-video").forEach((video) => {
+      video.addEventListener("play", () => {
+        document.querySelectorAll(".strip-video").forEach((v) => {
+          if (v !== video) {
+            v.pause();
+            v.currentTime = 0;
+          }
+        });
       });
     });
   </script>
